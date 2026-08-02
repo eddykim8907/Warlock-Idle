@@ -6,3 +6,11 @@
 #macro TICK_INTERVAL (1 / TICK_RATE)
 
 #macro STAT_ENTITY_PLAYER "player"
+
+#macro MAP_TILE_SIZE 512
+#macro MAP_CHUNK_MARGIN 1
+
+#macro MAP_PROP_LAYER "Instances"
+
+#macro VIEW_WIDTH 1366
+#macro VIEW_HEIGHT 768

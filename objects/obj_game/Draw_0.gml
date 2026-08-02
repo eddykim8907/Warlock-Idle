@@ -1,1 +1,1 @@
-map_manager_draw();
+map_manager_draw_background();

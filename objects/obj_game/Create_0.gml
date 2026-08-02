@@ -8,4 +8,6 @@ depth = 1000;
 if (!variable_global_exists("game_initialized")) {
 	game_manager_init();
 	global.game_initialized = true;
+} else {
+	map_manager_ensure();
 }

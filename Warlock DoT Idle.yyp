@@ -21,6 +21,7 @@
   "resources":[
     {"id":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},},
     {"id":{"name":"obj_game","path":"objects/obj_game/obj_game.yy",},},
+    {"id":{"name":"obj_map_prop","path":"objects/obj_map_prop/obj_map_prop.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"obj_projectile","path":"objects/obj_projectile/obj_projectile.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
@@ -35,6 +36,7 @@
     {"id":{"name":"GameManager","path":"scripts/GameManager/GameManager.yy",},},
     {"id":{"name":"MapDefs","path":"scripts/MapDefs/MapDefs.yy",},},
     {"id":{"name":"MapManager","path":"scripts/MapManager/MapManager.yy",},},
+    {"id":{"name":"MapTileDefs","path":"scripts/MapTileDefs/MapTileDefs.yy",},},
     {"id":{"name":"MathUtil","path":"scripts/MathUtil/MathUtil.yy",},},
     {"id":{"name":"SpawnManager","path":"scripts/SpawnManager/SpawnManager.yy",},},
     {"id":{"name":"StatManager","path":"scripts/StatManager/StatManager.yy",},},

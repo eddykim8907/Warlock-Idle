@@ -1,0 +1,38 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"ts_dungeon",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"ts_dungeon",
+  "out_columns":69,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Warlock DoT Idle",
+    "path":"Warlock DoT Idle.yyp",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"spr_tileset_dungeon",
+    "path":"sprites/spr_tileset_dungeon/spr_tileset_dungeon.yy",
+  },
+  "spriteNoExport":true,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":21,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":19,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":4371,
+}

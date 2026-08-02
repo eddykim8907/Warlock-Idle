@@ -1,0 +1,8 @@
+#macro GAME_STATE_PLAYING 0
+#macro GAME_STATE_PAUSED 1
+#macro GAME_STATE_DEAD 2
+
+#macro TICK_RATE 10
+#macro TICK_INTERVAL (1 / TICK_RATE)
+
+#macro STAT_ENTITY_PLAYER "player"

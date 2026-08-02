@@ -3,7 +3,7 @@ y = room_height * 0.5;
 depth = -100;
 
 fire_cooldown = 0;
-move_speed = 1.8;
+move_speed = 0.9;
 move_dir = random(360);
 move_turn_rate = 40;
 flee_radius = 220;

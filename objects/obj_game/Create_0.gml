@@ -10,4 +10,9 @@ if (!variable_global_exists("game_initialized")) {
 	global.game_initialized = true;
 } else {
 	map_manager_ensure();
+	dot_manager_ensure();
+	upgrade_manager_ensure();
+	if (!variable_global_exists("stats") || !variable_struct_exists(global.stats, "registry")) {
+		stat_manager_init();
+	}
 }

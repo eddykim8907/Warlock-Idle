@@ -1,7 +1,7 @@
 /// @description Map / stage configuration
 function map_defs_get(_stage) {
 	return {
-		id: "stage_1",
+		stage_key: "stage_1",
 		spawn_interval_base: 2.0,
 		spawn_interval_min: 0.5,
 		spawn_ramp_seconds: 120,
@@ -9,6 +9,30 @@ function map_defs_get(_stage) {
 		spawn_radius: 420,
 		enemy_def_id: "grunt",
 	};
+}
+
+function map_defs_get_spawn_interval_base(_cfg) {
+	return struct_field(_cfg, "spawn_interval_base", 2);
+}
+
+function map_defs_get_spawn_interval_min(_cfg) {
+	return struct_field(_cfg, "spawn_interval_min", 0.5);
+}
+
+function map_defs_get_spawn_ramp_seconds(_cfg) {
+	return struct_field(_cfg, "spawn_ramp_seconds", 120);
+}
+
+function map_defs_get_max_enemies(_cfg) {
+	return struct_field(_cfg, "max_enemies", 50);
+}
+
+function map_defs_get_spawn_radius(_cfg) {
+	return struct_field(_cfg, "spawn_radius", 400);
+}
+
+function map_defs_get_enemy_def_id(_cfg) {
+	return struct_field(_cfg, "enemy_def_id", "grunt");
 }
 
 /// @description Pick a tile template id for world chunk coordinates

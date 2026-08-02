@@ -7,8 +7,8 @@ function spawn_manager_init() {
 }
 
 function spawn_manager_step() {
-	var _def = global.spawn.map_def;
-	if (instance_number(obj_enemy) >= _def.max_enemies) {
+	var _cfg = global.spawn.map_def;
+	if (instance_number(obj_enemy) >= map_defs_get_max_enemies(_cfg)) {
 		return;
 	}
 
@@ -17,8 +17,8 @@ function spawn_manager_step() {
 		return;
 	}
 
-	var _t_norm = clamp(global.time.elapsed / _def.spawn_ramp_seconds, 0, 1);
-	var _interval = lerp(_def.spawn_interval_base, _def.spawn_interval_min, _t_norm);
+	var _t_norm = clamp(global.time.elapsed / map_defs_get_spawn_ramp_seconds(_cfg), 0, 1);
+	var _interval = lerp(map_defs_get_spawn_interval_base(_cfg), map_defs_get_spawn_interval_min(_cfg), _t_norm);
 	global.spawn.timer = _interval;
 
 	var _player = instance_find(obj_player, 0);
@@ -27,16 +27,21 @@ function spawn_manager_step() {
 	}
 
 	var _angle = random(360);
-	var _ex = _player.x + lengthdir_x(_def.spawn_radius, _angle);
-	var _ey = _player.y + lengthdir_y(_def.spawn_radius, _angle);
-	var _enemy_def = enemy_defs_get(_def.enemy_def_id);
+	var _radius = map_defs_get_spawn_radius(_cfg);
+	var _ex = _player.x + lengthdir_x(_radius, _angle);
+	var _ey = _player.y + lengthdir_y(_radius, _angle);
+	var _enemy_def = enemy_defs_get(map_defs_get_enemy_def_id(_cfg));
 
 	var _enemy = instance_create_layer(_ex, _ey, "Instances", obj_enemy);
-	_enemy.enemy_def_id = _def.enemy_def_id;
-	_enemy.hp = _enemy_def.hp;
-	_enemy.hp_max = _enemy_def.hp;
-	_enemy.move_speed = _enemy_def.speed;
-	_enemy.gold_drop = _enemy_def.gold_drop;
-	_enemy.sprite_frame = _enemy_def.sprite_frame;
-	_enemy.image_index = _enemy_def.sprite_frame;
+	_enemy.enemy_def_id = map_defs_get_enemy_def_id(_cfg);
+	_enemy.hp = enemy_defs_get_base_hp(_enemy_def);
+	_enemy.hp_max = enemy_defs_get_base_hp(_enemy_def);
+	_enemy.move_speed = enemy_defs_get_base_speed(_enemy_def);
+	_enemy.gold_drop = enemy_defs_get_gold_drop(_enemy_def);
+	_enemy.essence_drop = enemy_defs_get_essence_drop(_enemy_def);
+	_enemy.sprite_frame = enemy_defs_get_sprite_frame(_enemy_def);
+	_enemy.image_index = enemy_defs_get_sprite_frame(_enemy_def);
+	_enemy.image_xscale = enemy_defs_get_draw_scale(_enemy_def);
+	_enemy.image_yscale = enemy_defs_get_draw_scale(_enemy_def);
+	_enemy.is_boss = false;
 }

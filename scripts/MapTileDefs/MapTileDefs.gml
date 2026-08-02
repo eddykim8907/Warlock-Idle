@@ -4,45 +4,66 @@ function map_tile_defs_get(_tile_id) {
 	if (is_undefined(_tiles)) {
 		_tiles = {
 			forest: {
-				id: "forest",
 				ground_color: make_color_rgb(22, 38, 20),
 				props: [
-					{ frame: ASSET_FRAME_MAP_THREE_TREES, x: 70, y: 90, scale: 4.5 },
-					{ frame: ASSET_FRAME_MAP_TREE, x: 220, y: 60, scale: 4.0 },
-					{ frame: ASSET_FRAME_MAP_TREE2, x: 380, y: 110, scale: 4.2 },
-					{ frame: ASSET_FRAME_MAP_TREE, x: 140, y: 260, scale: 3.8 },
-					{ frame: ASSET_FRAME_MAP_TREE2, x: 300, y: 310, scale: 4.4 },
-					{ frame: ASSET_FRAME_MAP_TREE, x: 420, y: 400, scale: 4.0 },
-					{ frame: ASSET_FRAME_MAP_THREE_TREES, x: 80, y: 390, scale: 4.2 },
-					{ frame: ASSET_FRAME_MAP_TREE2, x: 250, y: 430, scale: 3.9 },
+					{ frame: ASSET_FRAME_MAP_THREE_TREES, offset_x: 70, offset_y: 90, prop_scale: 4.5 },
+					{ frame: ASSET_FRAME_MAP_TREE, offset_x: 220, offset_y: 60, prop_scale: 4.0 },
+					{ frame: ASSET_FRAME_MAP_TREE2, offset_x: 380, offset_y: 110, prop_scale: 4.2 },
+					{ frame: ASSET_FRAME_MAP_TREE, offset_x: 140, offset_y: 260, prop_scale: 3.8 },
+					{ frame: ASSET_FRAME_MAP_TREE2, offset_x: 300, offset_y: 310, prop_scale: 4.4 },
+					{ frame: ASSET_FRAME_MAP_TREE, offset_x: 420, offset_y: 400, prop_scale: 4.0 },
+					{ frame: ASSET_FRAME_MAP_THREE_TREES, offset_x: 80, offset_y: 390, prop_scale: 4.2 },
+					{ frame: ASSET_FRAME_MAP_TREE2, offset_x: 250, offset_y: 430, prop_scale: 3.9 },
 				],
 			},
 			town: {
-				id: "town",
 				ground_color: make_color_rgb(34, 30, 26),
 				props: [
-					{ frame: ASSET_FRAME_MAP_HOUSE, x: 90, y: 100, scale: 5.0 },
-					{ frame: ASSET_FRAME_MAP_HUT, x: 280, y: 140, scale: 4.5 },
-					{ frame: ASSET_FRAME_MAP_ROOF, x: 390, y: 90, scale: 4.2 },
-					{ frame: ASSET_FRAME_MAP_FIRE, x: 200, y: 320, scale: 4.0 },
-					{ frame: ASSET_FRAME_MAP_HOUSE, x: 340, y: 350, scale: 4.8 },
-					{ frame: ASSET_FRAME_MAP_HUT, x: 110, y: 380, scale: 4.3 },
+					{ frame: ASSET_FRAME_MAP_HOUSE, offset_x: 90, offset_y: 100, prop_scale: 5.0 },
+					{ frame: ASSET_FRAME_MAP_HUT, offset_x: 280, offset_y: 140, prop_scale: 4.5 },
+					{ frame: ASSET_FRAME_MAP_ROOF, offset_x: 390, offset_y: 90, prop_scale: 4.2 },
+					{ frame: ASSET_FRAME_MAP_FIRE, offset_x: 200, offset_y: 320, prop_scale: 4.0 },
+					{ frame: ASSET_FRAME_MAP_HOUSE, offset_x: 340, offset_y: 350, prop_scale: 4.8 },
+					{ frame: ASSET_FRAME_MAP_HUT, offset_x: 110, offset_y: 380, prop_scale: 4.3 },
 				],
 			},
 			landmark: {
-				id: "landmark",
 				ground_color: make_color_rgb(30, 28, 34),
 				props: [
-					{ frame: ASSET_FRAME_MAP_PALACE, x: 180, y: 160, scale: 5.5 },
-					{ frame: ASSET_FRAME_MAP_TREE, x: 60, y: 120, scale: 4.0 },
-					{ frame: ASSET_FRAME_MAP_TREE2, x: 400, y: 130, scale: 4.0 },
-					{ frame: ASSET_FRAME_MAP_FIRE, x: 100, y: 380, scale: 4.0 },
-					{ frame: ASSET_FRAME_MAP_FIRE, x: 360, y: 390, scale: 4.0 },
+					{ frame: ASSET_FRAME_MAP_PALACE, offset_x: 180, offset_y: 160, prop_scale: 5.5 },
+					{ frame: ASSET_FRAME_MAP_TREE, offset_x: 60, offset_y: 120, prop_scale: 4.0 },
+					{ frame: ASSET_FRAME_MAP_TREE2, offset_x: 400, offset_y: 130, prop_scale: 4.0 },
+					{ frame: ASSET_FRAME_MAP_FIRE, offset_x: 100, offset_y: 380, prop_scale: 4.0 },
+					{ frame: ASSET_FRAME_MAP_FIRE, offset_x: 360, offset_y: 390, prop_scale: 4.0 },
 				],
 			},
 		};
 	}
 	return _tiles[$ _tile_id];
+}
+
+function map_tile_defs_get_ground_color(_tile) {
+	return struct_field(_tile, "ground_color", c_black);
+}
+
+function map_tile_defs_get_props(_tile) {
+	return struct_field(_tile, "props", []);
+}
+
+function map_tile_prop_get_frame(_prop) {
+	return struct_field(_prop, "frame", 0);
+}
+
+function map_tile_prop_get_offset_x(_prop) {
+	return struct_field(_prop, "offset_x", 0);
+}
+
+function map_tile_prop_get_offset_y(_prop) {
+	return struct_field(_prop, "offset_y", 0);
+}
+
+function map_tile_prop_get_scale(_prop) {
+	return struct_field(_prop, "prop_scale", 1);
 }
 
 function map_tile_defs_all_ids() {

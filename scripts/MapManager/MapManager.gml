@@ -23,8 +23,8 @@ function map_manager_init() {
 
 function map_manager_get_player_focus(_player) {
 	return {
-		x: _player.x + sprite_get_width(_player.sprite_index) * _player.image_xscale * 0.5,
-		y: _player.y + sprite_get_height(_player.sprite_index) * _player.image_yscale * 0.5,
+		focus_x: _player.x + sprite_get_width(_player.sprite_index) * _player.image_xscale * 0.5,
+		focus_y: _player.y + sprite_get_height(_player.sprite_index) * _player.image_yscale * 0.5,
 	};
 }
 
@@ -87,8 +87,8 @@ function map_manager_update_camera(_player) {
 	}
 
 	var _focus = map_manager_get_player_focus(_player);
-	var _cam_x = round(_focus.x - VIEW_WIDTH * 0.5);
-	var _cam_y = round(_focus.y - VIEW_HEIGHT * 0.5);
+	var _cam_x = round(struct_field(_focus, "focus_x", _player.x) - VIEW_WIDTH * 0.5);
+	var _cam_y = round(struct_field(_focus, "focus_y", _player.y) - VIEW_HEIGHT * 0.5);
 
 	view_camera[0] = global.map.camera_id;
 	camera_set_view_pos(global.map.camera_id, _cam_x, _cam_y);
@@ -129,8 +129,8 @@ function map_manager_chunk_key(_chunk_x, _chunk_y) {
 
 function map_manager_world_to_chunk(_world_x, _world_y) {
 	return {
-		x: floor(_world_x / MAP_TILE_SIZE),
-		y: floor(_world_y / MAP_TILE_SIZE),
+		chunk_x: floor(_world_x / MAP_TILE_SIZE),
+		chunk_y: floor(_world_y / MAP_TILE_SIZE),
 	};
 }
 
@@ -149,22 +149,22 @@ function map_manager_load_chunk(_chunk_x, _chunk_y) {
 	var _origin_x = _chunk_x * MAP_TILE_SIZE;
 	var _origin_y = _chunk_y * MAP_TILE_SIZE;
 
-	for (var _i = 0; _i < array_length(_tile.props); _i++) {
-		var _def = _tile.props[_i];
+	for (var _i = 0; _i < array_length(map_tile_defs_get_props(_tile)); _i++) {
+		var _prop = map_tile_defs_get_props(_tile)[_i];
 		var _inst = instance_create_layer(
-			_origin_x + _def.x,
-			_origin_y + _def.y,
+			_origin_x + map_tile_prop_get_offset_x(_prop),
+			_origin_y + map_tile_prop_get_offset_y(_prop),
 			MAP_PROP_LAYER,
 			obj_map_prop
 		);
-		_inst.prop_frame = _def.frame;
-		_inst.prop_scale = _def.scale;
+		_inst.prop_frame = map_tile_prop_get_frame(_prop);
+		_inst.prop_scale = map_tile_prop_get_scale(_prop);
 		_inst.prop_phase = random(1000);
 		_inst.chunk_x = _chunk_x;
 		_inst.chunk_y = _chunk_y;
-		_inst.image_index = _def.frame;
-		_inst.image_xscale = _def.scale;
-		_inst.image_yscale = _def.scale;
+		_inst.image_index = map_tile_prop_get_frame(_prop);
+		_inst.image_xscale = map_tile_prop_get_scale(_prop);
+		_inst.image_yscale = map_tile_prop_get_scale(_prop);
 	}
 
 	ds_map_add(global.map.loaded_chunks, _key, _tile_id);
@@ -200,8 +200,8 @@ function map_manager_update_chunks(_world_x, _world_y) {
 	var _start = map_manager_world_to_chunk(_bounds.left, _bounds.top);
 	var _end = map_manager_world_to_chunk(_bounds.right, _bounds.bottom);
 
-	for (var _cx = _start.x; _cx <= _end.x; _cx++) {
-		for (var _cy = _start.y; _cy <= _end.y; _cy++) {
+	for (var _cx = struct_field(_start, "chunk_x", 0); _cx <= struct_field(_end, "chunk_x", 0); _cx++) {
+		for (var _cy = struct_field(_start, "chunk_y", 0); _cy <= struct_field(_end, "chunk_y", 0); _cy++) {
 			map_manager_load_chunk(_cx, _cy);
 		}
 	}
@@ -213,7 +213,7 @@ function map_manager_update_chunks(_world_x, _world_y) {
 		var _parts = string_split(_keys[_i], ",");
 		var _chunk_x = real(_parts[0]);
 		var _chunk_y = real(_parts[1]);
-		if (abs(_chunk_x - _center.x) > _unload_pad || abs(_chunk_y - _center.y) > _unload_pad) {
+		if (abs(_chunk_x - struct_field(_center, "chunk_x", 0)) > _unload_pad || abs(_chunk_y - struct_field(_center, "chunk_y", 0)) > _unload_pad) {
 			map_manager_unload_chunk(_chunk_x, _chunk_y);
 		}
 	}
@@ -233,11 +233,11 @@ function map_manager_draw_background() {
 	var _start = map_manager_world_to_chunk(_bounds.left, _bounds.top);
 	var _end = map_manager_world_to_chunk(_bounds.right, _bounds.bottom);
 
-	for (var _cx = _start.x; _cx <= _end.x; _cx++) {
-		for (var _cy = _start.y; _cy <= _end.y; _cy++) {
+	for (var _cx = struct_field(_start, "chunk_x", 0); _cx <= struct_field(_end, "chunk_x", 0); _cx++) {
+		for (var _cy = struct_field(_start, "chunk_y", 0); _cy <= struct_field(_end, "chunk_y", 0); _cy++) {
 			var _tile_id = map_defs_pick_tile_type(_cx, _cy);
 			var _tile = map_tile_defs_get(_tile_id);
-			draw_set_color(_tile.ground_color);
+			draw_set_color(map_tile_defs_get_ground_color(_tile));
 			draw_rectangle(
 				_cx * MAP_TILE_SIZE,
 				_cy * MAP_TILE_SIZE,

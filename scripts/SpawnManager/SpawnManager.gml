@@ -38,4 +38,5 @@ function spawn_manager_step() {
 	_enemy.move_speed = _enemy_def.speed;
 	_enemy.gold_drop = _enemy_def.gold_drop;
 	_enemy.sprite_frame = _enemy_def.sprite_frame;
+	_enemy.image_index = _enemy_def.sprite_frame;
 }

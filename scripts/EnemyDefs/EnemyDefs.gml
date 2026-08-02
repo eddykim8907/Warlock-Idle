@@ -8,7 +8,7 @@ function enemy_defs_get(_enemy_id) {
 				hp: 20,
 				speed: 1.2,
 				gold_drop: 3,
-				sprite_frame: 10,
+				sprite_frame: ASSET_FRAME_STAGE_1_MOB,
 			},
 		};
 	}

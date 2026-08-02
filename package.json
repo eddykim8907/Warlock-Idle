@@ -1,0 +1,21 @@
+{
+  "name": "warlock-dot-idle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eddykim8907/Warlock-Idle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/eddykim8907/Warlock-Idle/issues"
+  },
+  "homepage": "https://github.com/eddykim8907/Warlock-Idle#readme"
+}
